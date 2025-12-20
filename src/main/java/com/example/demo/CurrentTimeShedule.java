@@ -17,6 +17,6 @@ public class CurrentTimeShedule {
 
     @Scheduled(fixedRate = 10000)
     public void reportcCurrentTIme() {
-        log.info("Current time is " + dateFormat.format(new Date()));
+        log.info("The time is now " + dateFormat.format(new Date()));
     }
 }
