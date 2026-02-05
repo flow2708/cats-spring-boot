@@ -14,6 +14,9 @@ public class Cat {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("color")
+    private String color;
+
     public Cat() {
     }
 
@@ -33,5 +36,8 @@ public class Cat {
 
     public String getName() {
         return name;
+    }
+    public String getColor() {
+        return color;
     }
 }
