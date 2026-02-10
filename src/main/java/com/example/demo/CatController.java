@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.exceptions.CatNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +20,9 @@ public class CatController {
     }
 
     @GetMapping("/{id}")
-    public Cat getCatById(@PathVariable Long id) {
+    public Cat getCatById(@PathVariable Long id) throws CatNotFoundException {
         return catRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cat not found with id: " + id));
+                .orElseThrow(() -> new CatNotFoundException(id));
     }
 
     @PostMapping
