@@ -20,7 +20,7 @@ public class CatController {
     }
 
     @GetMapping("/{id}")
-    public Cat getCatById(@PathVariable Long id) throws CatNotFoundException {
+    public Cat getCatById(@PathVariable Long id) {
         return catRepository.findById(id)
                 .orElseThrow(() -> new CatNotFoundException(id));
     }
