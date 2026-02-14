@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.exceptions.CatNotFoundException;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +27,12 @@ public class CatController {
     }
 
     @PostMapping
-    public Cat createCat(@RequestBody Cat cat) {
+    public Cat createCat(@Validated @RequestBody Cat cat) {
         return catRepository.save(cat);
     }
 
     @PutMapping("/{id}")
-    public Cat updateCat(@PathVariable Long id, @RequestBody Cat updatedCat) {
+    public Cat updateCat(@Validated @PathVariable Long id, @RequestBody Cat updatedCat) {
         return catRepository.findById(id)
                 .map(cat -> {
                     cat.setName(updatedCat.getName());
