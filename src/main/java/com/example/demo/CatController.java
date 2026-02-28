@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.exceptions.CatNotFoundException;
+import com.example.demo.model.Cat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

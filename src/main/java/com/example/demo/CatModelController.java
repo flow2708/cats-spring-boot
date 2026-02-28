@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class CatModelController {
-    @RequestMapping("/hello")
-    public String hello(Model model) {
-        model.addAttribute("user", new User("John", 30));
-        return "hello";
-    }
     @GetMapping
     public String login() {
-
+        return "login";
     }
 }
