@@ -17,6 +17,11 @@ public class User {
         this.name = name;
         this.age = age;
     }
+
+    public User() {
+
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
