@@ -1,9 +1,11 @@
 package com.example.demo;
 
 import com.example.demo.model.User;
+import com.example.demo.repositories.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/")
 public class CatModelController {
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public String loginOrRegister(HttpServletRequest request, Model model) {
         // Проверяем куки безопасно
@@ -60,9 +65,7 @@ public class CatModelController {
                            @RequestParam String email,
                            @RequestParam String password,
                            Model model) {
-
-        // Здесь сохранение в БД
-        // Для примера просто показываем сообщение
+        userRepository.save(new User(username, email, password));
         model.addAttribute("message", "Регистрация успешна! Теперь войдите.");
         return "login";
     }
