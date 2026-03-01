@@ -21,8 +21,8 @@ public class CatModelController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String loginOrRegister(HttpServletRequest request, Model model) {
-        // Проверяем куки безопасно
+    public String loginOrRegister(HttpServletRequest request, Model model) {]
+
         Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -30,9 +30,8 @@ public class CatModelController {
                 if (cookie.getName().equals("username")) {
                     String username = cookie.getValue();
                     if (username != null && !username.isEmpty()) {
-                        // Если нашли куку - пользователь уже залогинен
                         model.addAttribute("username", username);
-                        return "profile";  // Отправляем на профиль
+                        return "profile";
                     }
                 }
             }
