@@ -21,7 +21,7 @@ public class CatModelController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String loginOrRegister(HttpServletRequest request, Model model) {]
+    public String loginOrRegister(HttpServletRequest request, Model model) {
 
         Cookie[] cookies = request.getCookies();
 
