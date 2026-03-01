@@ -1,8 +1,23 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true, nullable = false)
     private String username;
+
+    @Column(unique = true, nullable = false)
+    @Email
     private String email;
+
+    @Column(nullable = false)
     private String password;
 
     public User() {}
@@ -11,6 +26,14 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     // Геттеры и сеттеры
