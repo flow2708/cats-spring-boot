@@ -49,7 +49,6 @@ public class CatModelController {
             model.addAttribute("error", "Пользователя c этим именем не существует!");
             return "login";
         }
-        // Здесь проверка логина (в реальности - через БД)
         if (user.getPassword().equals(password)) {
             Cookie cookie = new Cookie("username", username);
             cookie.setMaxAge(24 * 60 * 60); // 24 часа
