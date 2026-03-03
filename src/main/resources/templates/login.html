@@ -2,50 +2,221 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Вход</title>
+    <title>Вход | DarkTheme</title>
     <style>
-        body { font-family: Arial; max-width: 400px; margin: 50px auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        input { width: 100%; padding: 8px; }
-        button { background: #007bff; color: white; padding: 10px 20px; border: none; }
-        .error { color: red; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0c0f;
+            color: #e1e4e8;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 90%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #1a1d24;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #2d333b;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #2d333b;
+            padding-bottom: 1rem;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            color: #8b949e;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: #238636;
+            color: white;
+        }
+
+        .tab:not(.active):hover {
+            background: #2d333b;
+            color: #e1e4e8;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #9da5b4;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0d1117;
+            border: 1px solid #2d333b;
+            border-radius: 8px;
+            color: #e1e4e8;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #238636;
+            box-shadow: 0 0 0 3px rgba(35,134,54,0.3);
+        }
+
+        input::placeholder {
+            color: #4f5a66;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            background: #2ea043;
+            transform: translateY(-1px);
+        }
+
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .alert-error {
+            background: rgba(218,54,51,0.1);
+            border: 1px solid #da3633;
+            color: #ff7b72;
+        }
+
+        .alert-success {
+            background: rgba(35,134,54,0.1);
+            border: 1px solid #238636;
+            color: #7ee87e;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #4f5a66;
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #2d333b;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .register-section {
+            margin-top: 2rem;
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
-<h2>Вход</h2>
+<div class="container">
+    <div class="tabs">
+        <a href="/login-page" class="tab active">🔑 Вход</a>
+        <a href="/" class="tab">📝 Регистрация</a>
+    </div>
 
-<div th:if="${error}" class="error" th:text="${error}"></div>
-<div th:if="${message}" style="color: green" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
 
-<form action="/login" method="post">
-    <div class="form-group">
-        <label>Имя пользователя:</label>
-        <input type="text" name="username" required>
-    </div>
-    <div class="form-group">
-        <label>Пароль:</label>
-        <input type="password" name="password" required>
-    </div>
-    <button type="submit">Войти</button>
-</form>
+    <form action="/login" method="post">
+        <div class="form-group">
+            <label>Имя пользователя</label>
+            <input type="text" name="username" placeholder="Введите имя пользователя" required>
+        </div>
+        <div class="form-group">
+            <label>Пароль</label>
+            <input type="password" name="password" placeholder="Введите пароль" required>
+        </div>
+        <button type="submit" class="btn">🔑 Войти</button>
+    </form>
 
-<hr>
+    <div class="divider">или</div>
 
-<h2>Регистрация</h2>
-<form action="/register" method="post">
-    <div class="form-group">
-        <label>Имя пользователя:</label>
-        <input type="text" name="username" required>
+    <div class="register-section">
+        <h2>📝 Регистрация</h2>
+        <form action="/register" method="post">
+            <div class="form-group">
+                <label>Имя пользователя</label>
+                <input type="text" name="username" placeholder="Придумайте имя" required>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input type="password" name="password" placeholder="Минимум 6 символов" required>
+            </div>
+            <button type="submit" class="btn">📝 Зарегистрироваться</button>
+        </form>
     </div>
-    <div class="form-group">
-        <label>Email:</label>
-        <input type="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label>Пароль:</label>
-        <input type="password" name="password" required>
-    </div>
-    <button type="submit">Зарегистрироваться</button>
-</form>
+</div>
 </body>
 </html>

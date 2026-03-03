@@ -1,10 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Регистрация | DarkTheme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0c0f;
+            color: #e1e4e8;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 90%;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #1a1d24;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border: 1px solid #2d333b;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #2d333b;
+            padding-bottom: 1rem;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            color: #8b949e;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            background: #238636;
+            color: white;
+        }
+
+        .tab:not(.active):hover {
+            background: #2d333b;
+            color: #e1e4e8;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #9da5b4;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0d1117;
+            border: 1px solid #2d333b;
+            border-radius: 8px;
+            color: #e1e4e8;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #238636;
+            box-shadow: 0 0 0 3px rgba(35,134,54,0.3);
+        }
+
+        input::placeholder {
+            color: #4f5a66;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            background: #2ea043;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #2d333b;
+            color: #e1e4e8;
+            border: 1px solid #444c56;
+        }
+
+        .btn-secondary:hover {
+            background: #363e48;
+        }
+
+        .alert {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .alert-error {
+            background: rgba(218,54,51,0.1);
+            border: 1px solid #da3633;
+            color: #ff7b72;
+        }
+
+        .alert-success {
+            background: rgba(35,134,54,0.1);
+            border: 1px solid #238636;
+            color: #7ee87e;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #8b949e;
+        }
+
+        .login-link a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="tabs">
+        <a href="/" class="tab active">📝 Регистрация</a>
+        <a href="/login-page" class="tab">🔑 Вход</a>
+    </div>
 
+    <h1>Создать аккаунт</h1>
+
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label>Имя пользователя</label>
+            <input type="text" name="username" placeholder="Придумайте уникальное имя" required>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+            <label>Пароль</label>
+            <input type="password" name="password" placeholder="Минимум 6 символов" required>
+        </div>
+        <button type="submit" class="btn">📝 Зарегистрироваться</button>
+    </form>
+
+    <div class="login-link">
+        Уже есть аккаунт? <a href="/login-page">Войти →</a>
+    </div>
+
+    <a href="/main" class="btn btn-secondary">← На главную</a>
+</div>
 </body>
 </html>

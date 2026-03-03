@@ -2,21 +2,204 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Профиль</title>
+  <title>Профиль | DarkTheme</title>
   <style>
-    body { font-family: Arial; max-width: 400px; margin: 50px auto; padding: 20px; }
-    .info { background: #f0f0f0; padding: 20px; border-radius: 5px; }
-    button { background: #dc3545; color: white; padding: 10px 20px; border: none; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #0a0c0f;
+      color: #e1e4e8;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 500px;
+      width: 90%;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #1a1d24;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      border: 1px solid #2d333b;
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #238636, #2ea043);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      border: 3px solid #2d333b;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      color: #8b949e;
+      font-size: 0.95rem;
+    }
+
+    .info-card {
+      background: #1e2329;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border: 1px solid #2d333b;
+    }
+
+    .info-row {
+      display: flex;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #2d333b;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      width: 120px;
+      color: #8b949e;
+      font-weight: 500;
+    }
+
+    .info-value {
+      flex: 1;
+      color: #e1e4e8;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn-logout {
+      background: #da3633;
+      color: white;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn-logout:hover {
+      background: #e05a57;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #2d333b;
+      color: #e1e4e8;
+      border-color: #444c56;
+    }
+
+    .btn-secondary:hover {
+      background: #363e48;
+      transform: translateY(-1px);
+    }
+
+    .stats {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat-item {
+      flex: 1;
+      background: #1e2329;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid #2d333b;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #58a6ff;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 1.5rem; }
+      .info-row { flex-direction: column; }
+      .info-label { width: 100%; margin-bottom: 0.25rem; }
+      .stats { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-<div class="info">
-  <h2>Профиль пользователя</h2>
-  <p>Добро пожаловать, <strong th:text="${username}">User</strong>!</p>
-  <a href="/logout">
-    <button>Выйти</button>
-  </a>
+<div class="container">
+  <div class="profile-header">
+    <div class="avatar">
+      <span th:text="${username != null ? username.substring(0,1).toUpperCase() : 'U'}">U</span>
+    </div>
+    <h1 th:text="${username}">Username</h1>
+    <div class="subtitle" th:text="${email}">email@example.com</div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-row">
+      <span class="info-label">Имя пользователя</span>
+      <span class="info-value" th:text="${username}">john_doe</span>
+    </div>
+    <div class="info-row" th:if="${email}">
+      <span class="info-label">Email</span>
+      <span class="info-value" th:text="${email}">john@example.com</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Статус</span>
+      <span class="info-value">🟢 Активен</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-value">✦</div>
+      <div class="stat-label">Участник</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">✓</div>
+      <div class="stat-label">Верифицирован</div>
+    </div>
+  </div>
+
+  <a href="/logout" class="btn btn-logout">🚪 Выйти</a>
+  <a href="/main" class="btn btn-secondary">← На главную</a>
 </div>
-<p><a href="/main">На главную</a></p>
 </body>
 </html>
