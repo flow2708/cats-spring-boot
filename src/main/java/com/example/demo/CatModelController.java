@@ -44,9 +44,12 @@ public class CatModelController {
                         @RequestParam String password,
                         HttpServletResponse response,
                         Model model) {
-
+        User user = userRepository.findByUsername(username).get();
+        if (user == null) {
+            model.addAttribute("error", "Пользователя c этим именем не существует!");
+        }
         // Здесь проверка логина (в реальности - через БД)
-        if ("user".equals(username) && "pass".equals(password)) {
+        if (user.getPassword().equals(password)) {
             Cookie cookie = new Cookie("username", username);
             cookie.setMaxAge(24 * 60 * 60); // 24 часа
             cookie.setPath("/");
@@ -54,7 +57,7 @@ public class CatModelController {
 
             return "redirect:/profile";
         } else {
-            model.addAttribute("error", "Неверный логин или пароль");
+            model.addAttribute("error", "Неверный пароль");
             return "login";
         }
     }
