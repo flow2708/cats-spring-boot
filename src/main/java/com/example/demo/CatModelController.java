@@ -20,6 +20,10 @@ public class CatModelController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/main")
+    public String main() {
+        return "main";
+    }
     @GetMapping
     public String loginOrRegister(HttpServletRequest request, Model model) {
 
