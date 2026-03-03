@@ -47,6 +47,7 @@ public class CatModelController {
         User user = userRepository.findByUsername(username).get();
         if (user == null) {
             model.addAttribute("error", "Пользователя c этим именем не существует!");
+            return "login";
         }
         // Здесь проверка логина (в реальности - через БД)
         if (user.getPassword().equals(password)) {
