@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 
 @Component
-@EnableScheduling
+//@EnableScheduling включить для активации задачи
 public class DeleteShedule {
     private static final Logger log = LoggerFactory.getLogger(DeleteShedule.class);
     private final CatRepository catRepository;

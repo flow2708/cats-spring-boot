@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
-//@EnableScheduling включить для активации задачи
+@EnableScheduling
 public class CurrentTimeShedule {
     private static final Logger log = LoggerFactory.getLogger(DeleteShedule.class);
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
