@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.NoSuchElementException;
+
 // TODO реализовать html отображение
 @Controller
 @RequestMapping("/")
@@ -48,8 +50,10 @@ public class CatModelController {
                         @RequestParam String password,
                         HttpServletResponse response,
                         Model model) {
-        User user = userRepository.findByUsername(username).get();
-        if (user == null) {
+        User user = null;
+        try {
+            user = userRepository.findByUsername(username).get();
+        } catch (NoSuchElementException e) {
             model.addAttribute("error", "Пользователя c этим именем не существует!");
             return "login";
         }
