@@ -23,8 +23,7 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
-            message = "Минимум 6 символов, цифра, заглавная и строчная буква")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$", message = "Минимум 6 символов, цифра, заглавная и строчная буква")
     @Column(nullable = false)
     private String password;
 
