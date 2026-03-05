@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.model.User;
 import com.example.demo.repositories.UserRepository;
+import com.example.demo.services.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,8 @@ import java.util.NoSuchElementException;
 public class CatModelController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/main")
     public String main() {
@@ -75,7 +78,7 @@ public class CatModelController {
                            @RequestParam String email,
                            @RequestParam String password,
                            Model model) {
-        userRepository.save(new User(username, email, password));
+        userService.register(new User(username, email, password), model);
         model.addAttribute("message", "Регистрация успешна! Теперь войдите.");
         return "login";
     }

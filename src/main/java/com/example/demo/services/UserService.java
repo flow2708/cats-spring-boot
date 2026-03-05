@@ -4,22 +4,23 @@ import com.example.demo.model.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-    public boolean register(User user) {
+    public boolean register(User user, Model model) {
         // Проверяем, существует ли уже пользователь
         if (userRepository.existsByUsername(user.getUsername())) {
-            return false;
+            model.addAttribute("error", "Пользователь с таким именем уже существует");
         }
         if (userRepository.existsByEmail(user.getEmail())) {
-            return false;
+            model.addAttribute("error", "Этот email уже привязан к другому пользователю");
         }
 
-        // В реальном проекте здесь должно быть хеширование пароля
+        user.setPassword();
         userRepository.save(user);
         return true;
     }
