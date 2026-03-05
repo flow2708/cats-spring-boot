@@ -13,6 +13,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private String role;
+
     @NotBlank(message = "Имя обязательно")
     @Size(min = 5, max = 20, message = "Имя может содержать от 5 до 20 символов")
     @Column(unique = true, nullable = false)
