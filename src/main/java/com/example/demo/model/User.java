@@ -3,6 +3,7 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -12,15 +13,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Имя обязательно!")
+    @NotBlank(message = "Имя обязательно")
     @Size(min = 5, max = 20, message = "Имя может содержать от 5 до 20 символов")
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Email(message = "Некорректный email")
+    @NotBlank(message = "Email обязателен")
     @Column(unique = true, nullable = false)
-    @Email
     private String email;
 
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$",
+            message = "Минимум 6 символов, цифра, заглавная и строчная буква")
     @Column(nullable = false)
     private String password;
 
