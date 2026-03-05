@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
+import com.example.demo.PasswordBCrypt;
 import com.example.demo.model.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -20,7 +22,7 @@ public class UserService {
             model.addAttribute("error", "Этот email уже привязан к другому пользователю");
         }
 
-        user.setPassword();
+        user.setPassword(PasswordBCrypt.passwordEncoder().encode(user.getPassword()));
         userRepository.save(user);
         return true;
     }
