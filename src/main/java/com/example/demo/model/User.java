@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -14,7 +15,7 @@ public class User {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private String role;
+    private Role role;
 
     @NotBlank(message = "Имя обязательно")
     @Size(min = 5, max = 20, message = "Имя может содержать от 5 до 20 символов")
