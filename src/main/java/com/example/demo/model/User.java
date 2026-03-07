@@ -33,7 +33,8 @@ public class User {
 
     public User() {}
 
-    public User(String username, String email, String password) {
+    public User(Role role, String username, String email, String password) {
+        this.role = role;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -42,9 +43,12 @@ public class User {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     // Геттеры и сеттеры

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.enums.Role;
 import com.example.demo.model.User;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.UserService;
@@ -78,7 +79,7 @@ public class CatModelController {
                            @RequestParam String email,
                            @RequestParam String password,
                            Model model) {
-        userService.register(new User(username, email, password), model);
+        userService.register(new User(Role.MEMBER, username, email, password), model);
         model.addAttribute("message", "Регистрация успешна! Теперь войдите.");
         return "login";
     }
