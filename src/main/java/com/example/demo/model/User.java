@@ -15,20 +15,21 @@ public class User {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
     private Role role;
 
     @NotBlank(message = "Имя обязательно")
     @Size(min = 5, max = 20, message = "Имя может содержать от 5 до 20 символов")
-    @Column(unique = true, nullable = false)
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @Email(message = "Некорректный email")
     @NotBlank(message = "Email обязателен")
-    @Column(unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$", message = "Минимум 6 символов, цифра, заглавная и строчная буква")
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     public User() {}
