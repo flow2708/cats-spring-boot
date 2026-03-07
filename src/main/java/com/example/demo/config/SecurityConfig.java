@@ -16,8 +16,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .anyRequest().permitAll()  // Разрешить все запросы
                 )
-                .csrf(csrf -> csrf.disable())  // Отключить CSRF для простоты
-                .formLogin(form -> form.disable())  // ОТКЛЮЧАЕМ СТАНДАРТНУЮ ФОРМУ LOGIN
+                .csrf(csrf -> csrf.disable())  // Отключить CSRF
+                .formLogin(form -> form.disable())  // Отключаем стандартную форму login
                 .httpBasic(httpBasic -> httpBasic.disable());  // Отключаем basic auth
 
         // Для H2 консоли
