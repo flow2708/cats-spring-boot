@@ -46,6 +46,12 @@ public class User {
 
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
+    public boolean isModerator() {
+        if (this.role.equals(Role.MODERATOR)) {
+            return true;
+        }
+        return false;
+    }
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
